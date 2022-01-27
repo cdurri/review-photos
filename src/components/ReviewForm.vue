@@ -37,9 +37,14 @@
         Upload files
     </button>
 
+    
+        <router-link :to="{name: 'reviews'}">
+            <button class="button continue-button">Continue</button>
+        </router-link>
+   
   </div>
 </template>
-<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript" defer></script> 
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript" defer></script>
 <script>
 export default {
     name: 'ReviewForm',
@@ -152,6 +157,10 @@ h1 {
     margin-top: 40px;
 }
 .upload-button {
+    margin-top: 20px;
+}
+.continue-button {
+    float: right;
     margin-top: 20px;
 }
 </style>

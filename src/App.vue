@@ -1,17 +1,13 @@
 <template>
   <div id="app">
-    <ReviewForm />
+    <router-view />
   </div>
 </template>
 
 <script>
-import ReviewForm from './components/ReviewForm.vue'
 
 export default {
   name: 'App',
-  components: {
-    ReviewForm
-  }
 }
 </script>
 
