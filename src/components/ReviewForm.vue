@@ -1,7 +1,7 @@
 <template>
   <div class="review-form">
     <h1>Review Form</h1>
-    <form>
+    <form @submit="formSubmit">
         <div class="form-group">
             <label for="email">Your Email Address</label>
             <input type="text"
@@ -23,17 +23,16 @@
             <textarea id="message"
                     rows="5"
                     class="textarea form-control"
-                    v-model="message">
+                    v-model="review">
             </textarea>
         </div>
-        <button class="button submit-button"
-            @click.prevent="submitted">Submit!
+        <button class="button submit-button">Submit!
         </button>
     </form>
     
     <button 
       id="upload_widget" 
-      class="button" @click="showUploadWidget">
+      class="button upload-button" @click="showUploadWidget">
         Upload files
     </button>
 
@@ -49,7 +48,7 @@ export default {
                 email: '',
                 rating: '',
             },
-            message: 'Your review...'
+            review: 'Your review...'
         }
     },
     mounted() {
@@ -112,6 +111,21 @@ export default {
                     console.log("Upload Widget event - ", info);
                 }
             });
+        },
+        formSubmit(e) {
+            e.preventDefault();
+            let currentObj = this;
+            this.$http.post('/user', {
+                email: this.userData.email,
+                rating: this.userData.rating,
+                review: this.review
+            })
+            .then(function (response) {
+                currentObj.output = response.data;
+            })
+            .catch(function (error) {
+                currentObj.output = error;
+            });
         }
     },
 }
@@ -133,13 +147,10 @@ h1 {
     font-size: 30px;
     font-weight: bold;
 }
-h3 {
-  margin: 40px 0 0;
-}
-a {
-  color: #42b983;
-}
 .submit-button {
     margin-top: 40px;
+}
+.upload-button {
+    margin-top: 20px;
 }
 </style>
