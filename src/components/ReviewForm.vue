@@ -23,7 +23,8 @@
             <textarea id="message"
                     rows="5"
                     class="textarea form-control"
-                    v-model="review">
+                    v-model="review"
+                    placeholder="Your review...">
             </textarea>
         </div>
         <button class="button submit-button">Submit!
@@ -48,7 +49,7 @@ export default {
                 email: '',
                 rating: '',
             },
-            review: 'Your review...'
+            review: ''
         }
     },
     mounted() {
