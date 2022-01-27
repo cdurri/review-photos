@@ -63,7 +63,7 @@ export default {
         showUploadWidget() {
             cloudinary.openUploadWidget({
                 cloudName: "smartbox",
-                uploadPreset: "<upload preset>",
+                uploadPreset: "x4ndltu1",
                 sources: [
                     "local",
                     "url",
