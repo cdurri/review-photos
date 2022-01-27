@@ -1,0 +1,145 @@
+<template>
+  <div class="review-form">
+    <h1>Review Form</h1>
+    <form>
+        <div class="form-group">
+            <label for="email">Your Email Address</label>
+            <input type="text"
+                id="email"
+                class="input form-control"
+                v-model="userData.email">
+        </div>
+        <div class="form-group">
+            <label for="satisfaction">Rating (1 - 10)</label>
+            <input min="1"
+                max="10"
+                type="number"
+                id="rating"
+                class="input form-control"
+                v-model.number="userData.rating">
+        </div>
+        <div class="form-group">
+            <label for="message">Your Message</label>
+            <textarea id="message"
+                    rows="5"
+                    class="textarea form-control"
+                    v-model="message">
+            </textarea>
+        </div>
+        <button class="button submit-button"
+            @click.prevent="submitted">Submit!
+        </button>
+    </form>
+    
+    <button 
+      id="upload_widget" 
+      class="button" @click="showUploadWidget">
+        Upload files
+    </button>
+
+  </div>
+</template>
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript" defer></script> 
+<script>
+export default {
+    name: 'ReviewForm',
+    data() {
+        return {
+            userData: {
+                email: '',
+                rating: '',
+            },
+            message: 'Your review...'
+        }
+    },
+    mounted() {
+        let externalScript = document.createElement('script')
+        externalScript.setAttribute('src', 'https://upload-widget.cloudinary.com/global/all.js')
+        document.head.appendChild(externalScript)
+    },
+    methods: {
+        submitted() {
+            this.isSubmitted = true;
+        },
+        showUploadWidget() {
+            cloudinary.openUploadWidget({
+                cloudName: "smartbox",
+                uploadPreset: "<upload preset>",
+                sources: [
+                    "local",
+                    "url",
+                    "camera",
+                    "image_search",
+                    "google_drive",
+                    "facebook",
+                    "dropbox",
+                    "instagram",
+                    "shutterstock",
+                    "getty",
+                    "istock",
+                    "unsplash"
+                ],
+                googleApiKey: "<image_search_google_api_key>",
+                showAdvancedOptions: true,
+                cropping: true,
+                multiple: false,
+                defaultSource: "local",
+                styles: {
+                    palette: {
+                        window: "#FFFFFF",
+                        windowBorder: "#90A0B3",
+                        tabIcon: "#0078FF",
+                        menuIcons: "#5A616A",
+                        textDark: "#000000",
+                        textLight: "#FFFFFF",
+                        link: "#0078FF",
+                        action: "#FF620C",
+                        inactiveTabIcon: "#0E2F5A",
+                        error: "#F44235",
+                        inProgress: "#0078FF",
+                        complete: "#20B832",
+                        sourceBg: "#E4EBF1"
+                    },
+                    fonts: {
+                        default: {
+                            active: true
+                        }
+                    }
+                }
+            },
+            (err, info) => {
+                if (!err) {    
+                    console.log("Upload Widget event - ", info);
+                }
+            });
+        }
+    },
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.review-form {
+    width: 720px;
+    margin: 0 auto;
+}
+label {
+    text-align: left;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+h3 {
+  margin: 40px 0 0;
+}
+a {
+  color: #42b983;
+}
+.submit-button {
+    margin-top: 40px;
+}
+</style>
