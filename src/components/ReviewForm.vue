@@ -38,9 +38,9 @@
     </button>
 
     
-        <router-link :to="{name: 'reviews'}">
-            <button class="button continue-button">Continue</button>
-        </router-link>
+    <router-link :to="{name: 'reviews'}">
+        <button class="button continue-button">Continue</button>
+    </router-link>
    
   </div>
 </template>
@@ -137,7 +137,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .review-form {
     width: 720px;
