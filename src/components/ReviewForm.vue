@@ -114,6 +114,8 @@ export default {
                 }
             },
             (err, info) => {
+
+                console.log('info:', info)
                 this.info = info;
 
                 if (!err) {    
