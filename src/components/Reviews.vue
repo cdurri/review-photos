@@ -4,6 +4,7 @@
             <div class="column">
               <div class="reviews__rating">
                 <p>{{ rating }}</p>
+                <star-rating read-only :show-rating="false" star-size="25" v-model="star_rating"></star-rating>
                 <span>
                  <img src="" />
                 </span>
@@ -32,7 +33,9 @@
         </router-link>
   </div>
 </template>
+<script src="https://unpkg.com/vue-star-rating/dist/VueStarRating.umd.min.js"></script>
 <script>
+import StarRating from 'vue-star-rating';
 export default {
     name: 'Reviews',
     data() {
@@ -42,7 +45,8 @@ export default {
             author: '',
             date: '',
             review: '',
-            rating: ''
+            rating: '',
+            star_rating: ''
         }
     },
     async mounted() {
@@ -54,6 +58,7 @@ export default {
         this.date = this.info[0].date;
         this.review = this.info[0].comment;
         this.rating = this.info[0].rating;
+        this.star_rating = this.info[0].rating;
 
         console.log('infos:', this.info);
 
@@ -68,8 +73,10 @@ export default {
           const author = authorArray[0];
           this.author = author.toUpperCase();
         }
+    },
+    components: {
+      StarRating
     }
-   
 }
 </script>
 
