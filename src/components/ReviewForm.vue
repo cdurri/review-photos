@@ -116,7 +116,10 @@ export default {
             (err, info) => {
 
                 console.log('info:', info)
-                this.info = info;
+
+                if ('success' === info.event) {
+                    this.info = info.info;
+                }
 
                 if (!err) {    
                     console.log("Upload Widget event - ", info);
@@ -126,11 +129,17 @@ export default {
         formSubmit(e) {
             e.preventDefault();
             let currentObj = this;
+
+            let images = []
+            if ('' !== this.info) {
+                images.push({ url: this.info.url })
+            }
+
             this.$http.post('https://localhost/api/reviews', {
                 email: this.userData.email,
                 rating: this.userData.rating,
                 comment: this.review,
-                images: [{ url: this.info.url }],
+                images: images,
             })
             .then(function (response) {
                 currentObj.output = response.data;

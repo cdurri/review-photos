@@ -3,25 +3,26 @@
         <div class="columns is-2">
             <div class="column">
               <div class="reviews__rating">
+                <p>{{ rating }}</p>
                 <span>
-                  <i></i>
+                 <img src="" />
                 </span>
               </div>
               <div class="reviews__author">
                <p class="review__author">
-                  <span>MARK1990</span>
+                  <span>{{ author }}</span>
                 </p>
               </div>
             </div>
             <div class="column is-10">
-                <time>27/10/2022</time>
+                <time>{{ date }}</time>
                 <div>
                   <p class="reviews__body">
-                    We had a very enjoyable stay at the beautiful Rose Hotel. Everything was very satisfactory except the service which was very slow on occasion. However, the staff were all very professional and pleasant at all times.
+                    {{ review }}
                   </p>  
                 </div>
                 <div>
-                   <img v-for="(image, index) in images" :src="image" :key="index" />
+                   <img :src="info[0].images[0].url" />
                 </div> 
             </div>
         </div>
@@ -37,8 +38,38 @@ export default {
     data() {
         return {
             images: ['https://placeimg.com/150/110/any', 'https://placeimg.com/150/110/any', 'https://placeimg.com/150/110/any'],
-          }
+            info: [],
+            author: '',
+            date: '',
+            review: '',
+            rating: ''
+        }
     },
+    async mounted() {
+        const response =  await this.$http.get('https://localhost/api/reviews');
+
+        console.log('response:', response)
+        this.info = response.data;
+
+        this.date = this.info[0].date;
+        this.review = this.info[0].comment;
+        this.rating = this.info[0].rating;
+
+        console.log('infos:', this.info);
+
+        this.getAuthorName();
+    },
+    methods: {
+       getAuthorName() {
+          const email = this.info[0].email;
+          console.log('email:', email);
+          const authorArray = email.split('@');
+          console.log('authorArray:', authorArray)
+          const author = authorArray[0];
+          this.author = author.toUpperCase();
+        }
+    }
+   
 }
 </script>
 
