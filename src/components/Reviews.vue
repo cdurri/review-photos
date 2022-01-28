@@ -8,7 +8,7 @@
                 </span>
               </div>
               <div class="reviews__author">
-               <p class="review-item__author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+               <p class="review__author">
                   <span>MARK1990</span>
                 </p>
               </div>
