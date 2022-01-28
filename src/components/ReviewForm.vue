@@ -53,6 +53,7 @@ export default {
             userData: {
                 email: '',
                 rating: '',
+                info: ''
             },
             review: ''
         }
@@ -87,7 +88,7 @@ export default {
                 googleApiKey: "<image_search_google_api_key>",
                 showAdvancedOptions: true,
                 cropping: true,
-                multiple: false,
+                multiple: true,
                 defaultSource: "local",
                 styles: {
                     palette: {
@@ -113,6 +114,8 @@ export default {
                 }
             },
             (err, info) => {
+                this.info = info;
+
                 if (!err) {    
                     console.log("Upload Widget event - ", info);
                 }
@@ -121,10 +124,11 @@ export default {
         formSubmit(e) {
             e.preventDefault();
             let currentObj = this;
-            this.$http.post('/user', {
+            this.$http.post('https://localhost/api/reviews', {
                 email: this.userData.email,
                 rating: this.userData.rating,
-                review: this.review
+                comment: this.review,
+                images: [{ url: this.info.url }],
             })
             .then(function (response) {
                 currentObj.output = response.data;

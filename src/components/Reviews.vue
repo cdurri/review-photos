@@ -36,8 +36,62 @@ export default {
     name: 'Reviews',
     data() {
         return {
-            images: ['https://placeimg.com/150/110/any', 'https://placeimg.com/150/110/any', 'https://placeimg.com/150/110/any']
-        }
+            images: ['https://placeimg.com/150/110/any', 'https://placeimg.com/150/110/any', 'https://placeimg.com/150/110/any'],
+            api: [
+                  {
+                    "id": 5,
+                    "email": "rafaela.mansini@smartbox.com",
+                    "comment": "this is my review comment.",
+                    "date": "2022-01-27",
+                    "rating": 8,
+                    "images": [
+                      {
+                        "url": "http://my-image-one.com"
+                      },
+                      {
+                        "url": "http://my-image-two.com"
+                      }
+                    ]
+                  },
+                  {
+                    "id": 6,
+                    "email": "rafaela.mansini@smartbox.com",
+                    "comment": "this is my review comment.",
+                    "date": "2022-01-27",
+                    "rating": 8,
+                    "images": [
+                      {
+                        "url": "http://my-image-one.com"
+                      },
+                      {
+                        "url": "http://my-image-two.com"
+                      }
+                    ]
+                  },
+                  {
+                    "id": 7,
+                    "email": "rafamar@tbox.com",
+                    "comment": "this is my review comment.",
+                    "date": "2022-01-27",
+                    "rating": 8,
+                    "images": [
+                      {
+                        "url": "http://my-image-one.com"
+                      },
+                      {
+                        "url": "http://my-image-two.com"
+                      }
+                    ]
+                  }
+                ],
+          }
+    },
+     mounted() {
+        const response =  this.$http.get(this.api);
+
+        console.log('data:', response);
+
+        return response.data;
     },
 }
 </script>
