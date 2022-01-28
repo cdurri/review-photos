@@ -25,6 +25,10 @@
                 </div> 
             </div>
         </div>
+
+         <router-link :to="{name: 'reviews_form'}">
+            <button class="button continue-button">Previous</button>
+        </router-link>
   </div>
 </template>
 <script>
